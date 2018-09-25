@@ -1,0 +1,42 @@
+{
+    "name": "innmind/infrastructure-nginx",
+    "type": "library",
+    "description": "Tool to install nginx",
+    "keywords": ["nginx"],
+    "homepage": "http://github.com/Innmind/InfrastructureNginx",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Baptiste Langlade",
+            "email": "langlade.baptiste@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "http://github.com/Innmind/InfrastructureNginx/issues"
+    },
+    "require": {
+        "php": "~7.2",
+        "innmind/cli": "^1.3",
+        "innmind/server-control": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Innmind\\Infrastructure\\Nginx\\": "src/"
+        },
+        "files": ["src/bootstrap.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Innmind\\Infrastructure\\Nginx\\": "tests/",
+            "Fixture\\Innmind\\Infrastructure\\Nginx\\": "fixtures/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "giorgiosironi/eris": "^0.10.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --colors=always"
+    },
+    "bin": ["infrastructure-nginx"]
+}
