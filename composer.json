@@ -22,7 +22,8 @@
     "autoload": {
         "psr-4": {
             "Innmind\\Infrastructure\\Nginx\\": "src/"
-        }
+        },
+        "files": ["src/bootstrap.php"]
     },
     "autoload-dev": {
         "psr-4": {
