@@ -17,7 +17,9 @@
     "require": {
         "php": "~7.2",
         "innmind/cli": "^1.3",
-        "innmind/server-control": "^2.5"
+        "innmind/server-control": "^2.5",
+        "innmind/installation-monitor": "^1.1",
+        "innmind/filesystem": "^3.2"
     },
     "autoload": {
         "psr-4": {
