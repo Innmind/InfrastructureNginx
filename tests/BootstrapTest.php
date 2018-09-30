@@ -11,7 +11,7 @@ class BootstrapTest extends TestCase
 {
     public function testBootstrap()
     {
-        $commands = bootstrap();
+        $commands = bootstrap('/tmp');
 
         $this->assertInstanceOf(Commands::class, $commands);
     }
