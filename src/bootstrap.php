@@ -5,20 +5,23 @@ namespace Innmind\Infrastructure\Nginx;
 
 use function Innmind\InstallationMonitor\bootstrap as monitor;
 use Innmind\CLI\Commands;
-use Innmind\Server\Control\ServerFactory;
-use Innmind\Filesystem\Adapter\FilesystemAdapter;
+use Innmind\Url\{
+    PathInterface,
+    Path,
+};
+use Innmind\OperatingSystem\OperatingSystem;
 
-function bootstrap(string $nginx = null): Commands
+function bootstrap(OperatingSystem $os, PathInterface $nginx = null): Commands
 {
-    $clients = monitor()['client'];
+    $clients = monitor($os)['client'];
 
     return new Commands(
-        new Command\Install(ServerFactory::build()),
+        new Command\Install($os->control()),
         new Command\SetupSite(
             $clients['silence'](
-                $clients['socket']()
+                $clients['ipc']()
             ),
-            new FilesystemAdapter($nginx ?? '/etc/nginx/sites-available')
+            $os->filesystem()->mount($nginx ?? new Path('/etc/nginx/sites-available'))
         )
     );
 }
