@@ -40,5 +40,13 @@
     "scripts": {
         "test": "vendor/bin/phpunit --colors=always"
     },
-    "bin": ["infrastructure-nginx"]
+    "bin": ["infrastructure-nginx"],
+    "extra": {
+        "gene": {
+            "expression": [
+                "infrastructure-nginx install",
+                "infrastructure-nginx setup-site"
+            ]
+        }
+    }
 }
