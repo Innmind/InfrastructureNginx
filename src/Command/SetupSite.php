@@ -49,6 +49,7 @@ final class SetupSite implements Command
             return;
         }
 
+        /** @var string */
         $path = $events
             ->get('website_available')
             ->last()
