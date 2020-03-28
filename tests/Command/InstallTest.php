@@ -38,7 +38,7 @@ install
 This will install nginx on the machine
 USAGE;
 
-        $this->assertSame($usage, (string) new Install($this->createMock(Server::class)));
+        $this->assertSame($usage, (new Install($this->createMock(Server::class)))->toString());
     }
 
     public function testInvokation()
@@ -54,7 +54,7 @@ USAGE;
             ->expects($this->once())
             ->method('execute')
             ->with($this->callback(static function($command): bool {
-                return (string) $command === "apt-get 'install' 'nginx' '-y'";
+                return $command->toString() === "apt-get 'install' 'nginx' '-y'";
             }))
             ->willReturn($process = $this->createMock(Process::class));
         $process

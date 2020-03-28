@@ -16,14 +16,14 @@ use Innmind\InstallationMonitor\{
 use Innmind\Filesystem\{
     Adapter,
     File\File,
-    Stream\StringStream,
 };
+use Innmind\Stream\Readable\Stream;
 use Innmind\Immutable\Str;
 
 final class SetupSite implements Command
 {
-    private $client;
-    private $config;
+    private Client $client;
+    private Adapter $config;
 
     public function __construct(Client $client, Adapter $config)
     {
@@ -37,18 +37,19 @@ final class SetupSite implements Command
             ->client
             ->events()
             ->groupBy(static function(Event $event): string {
-                return (string) $event->name();
+                return $event->name()->toString();
             });
 
         if (!$events->contains('website_available')) {
             $env->error()->write(
-                Str::of("No website available\n")
+                Str::of("No website available\n"),
             );
             $env->exit(1);
 
             return;
         }
 
+        /** @var string */
         $path = $events
             ->get('website_available')
             ->last()
@@ -87,13 +88,13 @@ server {
 }
 CONFIG;
 
-        $this->config->add(new File(
+        $this->config->add(File::named(
             'default',
-            new StringStream($config)
+            Stream::ofContent($config),
         ));
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return <<<USAGE
 setup-site

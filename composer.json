@@ -15,12 +15,11 @@
         "issues": "http://github.com/Innmind/InfrastructureNginx/issues"
     },
     "require": {
-        "php": "~7.2",
-        "innmind/cli": "^1.3",
-        "innmind/server-control": "^2.5",
-        "innmind/installation-monitor": "^2.1",
-        "innmind/filesystem": "^3.2",
-        "innmind/silent-cartographer": "^1.1"
+        "php": "~7.4",
+        "innmind/cli": "~2.0",
+        "innmind/operating-system": "~2.0",
+        "innmind/installation-monitor": "~3.0",
+        "innmind/silent-cartographer": "~2.0"
     },
     "autoload": {
         "psr-4": {
@@ -36,10 +35,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0",
-        "giorgiosironi/eris": "^0.10.0"
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit --colors=always"
+        "giorgiosironi/eris": "^0.10.0",
+        "vimeo/psalm": "^3.10"
     },
     "bin": ["infrastructure-nginx"],
     "extra": {

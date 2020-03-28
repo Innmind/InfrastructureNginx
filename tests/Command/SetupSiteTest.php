@@ -19,7 +19,7 @@ use Innmind\Stream\Writable;
 use Innmind\Immutable\{
     Map,
     Str,
-    Stream,
+    Sequence,
 };
 use PHPUnit\Framework\TestCase;
 
@@ -49,10 +49,10 @@ USAGE;
 
         $this->assertSame(
             $usage,
-            (string) new SetupSite(
+            (new SetupSite(
                 $this->createMock(Client::class),
                 $this->createMock(Adapter::class)
-            )
+            ))->toString()
         );
     }
 
@@ -65,17 +65,17 @@ USAGE;
         $client
             ->expects($this->once())
             ->method('events')
-            ->willReturn(Stream::of(
+            ->willReturn(Sequence::of(
                 Event::class,
                 new Event(
                     new Event\Name('website_available'),
-                    (new Map('string', 'variable'))
-                        ->put('path', '/foo')
+                    Map::of('string', 'scalar|array')
+                        ('path', '/foo')
                 ),
                 new Event(
                     new Event\Name('website_available'),
-                    (new Map('string', 'variable'))
-                        ->put('path', '/bar')
+                    Map::of('string', 'scalar|array')
+                        ('path', '/bar')
                 )
             ));
         $config
@@ -85,8 +85,8 @@ USAGE;
                 $maj = \PHP_MAJOR_VERSION;
                 $min = \PHP_MINOR_VERSION;
 
-                return (string) $file->name() === 'default' &&
-                    (string) $file->content() === <<<CONFIG
+                return $file->name()->toString() === 'default' &&
+                    $file->content()->toString() === <<<CONFIG
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -132,11 +132,11 @@ CONFIG;
         $client
             ->expects($this->once())
             ->method('events')
-            ->willReturn(Stream::of(
+            ->willReturn(Sequence::of(
                 Event::class,
                 new Event(
                     new Event\Name('watev'),
-                    new Map('string', 'variable')
+                    Map::of('string', 'scalar|array')
                 )
             ));
         $config

@@ -16,7 +16,7 @@ use Innmind\Server\Control\{
 
 final class Install implements Command
 {
-    private $server;
+    private Server $server;
 
     public function __construct(Server $server)
     {
@@ -25,21 +25,20 @@ final class Install implements Command
 
     public function __invoke(Environment $env, Arguments $arguments, Options $options): void
     {
-        $code = $this
+        $process = $this
             ->server
             ->processes()
             ->execute(
                 ServerCommand::foreground('apt-get')
                     ->withArgument('install')
                     ->withArgument('nginx')
-                    ->withShortOption('y')
-            )
-            ->wait()
-            ->exitCode();
-        $env->exit($code->toInt());
+                    ->withShortOption('y'),
+            );
+        $process->wait();
+        $env->exit($process->exitCode()->toInt());
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return <<<USAGE
 install
