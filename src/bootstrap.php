@@ -5,13 +5,10 @@ namespace Innmind\Infrastructure\Nginx;
 
 use function Innmind\InstallationMonitor\bootstrap as monitor;
 use Innmind\CLI\Commands;
-use Innmind\Url\{
-    PathInterface,
-    Path,
-};
+use Innmind\Url\Path;
 use Innmind\OperatingSystem\OperatingSystem;
 
-function bootstrap(OperatingSystem $os, PathInterface $nginx = null): Commands
+function bootstrap(OperatingSystem $os, Path $nginx = null): Commands
 {
     $clients = monitor($os)['client'];
 
@@ -21,7 +18,7 @@ function bootstrap(OperatingSystem $os, PathInterface $nginx = null): Commands
             $clients['silence'](
                 $clients['ipc']()
             ),
-            $os->filesystem()->mount($nginx ?? new Path('/etc/nginx/sites-available'))
+            $os->filesystem()->mount($nginx ?? Path::of('/etc/nginx/sites-available/'))
         )
     );
 }

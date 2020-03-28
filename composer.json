@@ -16,11 +16,10 @@
     },
     "require": {
         "php": "~7.4",
-        "innmind/cli": "^1.3",
-        "innmind/server-control": "^2.5",
-        "innmind/installation-monitor": "^2.1",
-        "innmind/filesystem": "^3.2",
-        "innmind/silent-cartographer": "^1.1"
+        "innmind/cli": "~2.0",
+        "innmind/operating-system": "~2.0",
+        "innmind/installation-monitor": "~3.0",
+        "innmind/silent-cartographer": "~2.0"
     },
     "autoload": {
         "psr-4": {

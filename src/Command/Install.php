@@ -25,7 +25,7 @@ final class Install implements Command
 
     public function __invoke(Environment $env, Arguments $arguments, Options $options): void
     {
-        $code = $this
+        $process = $this
             ->server
             ->processes()
             ->execute(
@@ -33,13 +33,12 @@ final class Install implements Command
                     ->withArgument('install')
                     ->withArgument('nginx')
                     ->withShortOption('y')
-            )
-            ->wait()
-            ->exitCode();
-        $env->exit($code->toInt());
+            );
+        $process->wait();
+        $env->exit($process->exitCode()->toInt());
     }
 
-    public function __toString(): string
+    public function toString(): string
     {
         return <<<USAGE
 install
