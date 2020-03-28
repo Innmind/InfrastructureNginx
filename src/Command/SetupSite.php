@@ -42,7 +42,7 @@ final class SetupSite implements Command
 
         if (!$events->contains('website_available')) {
             $env->error()->write(
-                Str::of("No website available\n")
+                Str::of("No website available\n"),
             );
             $env->exit(1);
 
@@ -90,7 +90,7 @@ CONFIG;
 
         $this->config->add(File::named(
             'default',
-            Stream::ofContent($config)
+            Stream::ofContent($config),
         ));
     }
 

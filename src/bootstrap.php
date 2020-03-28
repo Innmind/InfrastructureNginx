@@ -16,9 +16,9 @@ function bootstrap(OperatingSystem $os, Path $nginx = null): Commands
         new Command\Install($os->control()),
         new Command\SetupSite(
             $clients['silence'](
-                $clients['ipc']()
+                $clients['ipc'](),
             ),
-            $os->filesystem()->mount($nginx ?? Path::of('/etc/nginx/sites-available/'))
-        )
+            $os->filesystem()->mount($nginx ?? Path::of('/etc/nginx/sites-available/')),
+        ),
     );
 }

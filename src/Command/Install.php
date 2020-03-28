@@ -32,7 +32,7 @@ final class Install implements Command
                 ServerCommand::foreground('apt-get')
                     ->withArgument('install')
                     ->withArgument('nginx')
-                    ->withShortOption('y')
+                    ->withShortOption('y'),
             );
         $process->wait();
         $env->exit($process->exitCode()->toInt());
