@@ -16,7 +16,7 @@ use Innmind\Server\Control\{
 
 final class Install implements Command
 {
-    private $server;
+    private Server $server;
 
     public function __construct(Server $server)
     {

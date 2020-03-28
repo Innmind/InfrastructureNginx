@@ -15,7 +15,7 @@
         "issues": "http://github.com/Innmind/InfrastructureNginx/issues"
     },
     "require": {
-        "php": "~7.2",
+        "php": "~7.4",
         "innmind/cli": "^1.3",
         "innmind/server-control": "^2.5",
         "innmind/installation-monitor": "^2.1",
