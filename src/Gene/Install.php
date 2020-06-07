@@ -44,6 +44,8 @@ final class Install implements Gene
                     ->withArgument('install')
                     ->withShortOption('y')
                     ->withArgument('nginx'),
+                Command::foreground('rm')
+                    ->withArgument('/etc/nginx/sites-enabled/default'),
             );
             $install($target);
         } catch (ScriptFailed $e) {
