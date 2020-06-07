@@ -89,15 +89,23 @@ server {
 }
 CONFIG;
 
+                $path = '/etc/nginx/sites-available/'.$name;
                 $sites[] = Command::foreground('echo')
                     ->withArgument($config)
-                    ->overwrite(Path::of('/etc/nginx/sites-available/'.$name));
+                    ->overwrite(Path::of($path));
+                $sites[] = Command::foreground('ln')
+                    ->withShortOption('s')
+                    ->withArgument($path)
+                    ->withArgument('/etc/nginx/sites-enabled/');
 
                 return $sites;
             },
         );
 
         try {
+            $commands[] = Command::foreground('service')
+                ->withArgument('nginx')
+                ->withArgument('reload');
             $configure = new Script(...$commands);
             $configure($target);
         } catch (ScriptFailed $e) {
